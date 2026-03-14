@@ -1,26 +1,38 @@
 package com.example.gazoraallasbejelento.ui.admin;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gazoraallasbejelento.R;
 
 public class AdminActivity extends AppCompatActivity {
 
+    private Button manageUsersButton;
+    private Button manageMetersButton;
+    private Button managePropertiesButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        manageUsersButton = findViewById(R.id.manageUsersButton);
+        manageMetersButton = findViewById(R.id.manageMetersButton);
+        managePropertiesButton = findViewById(R.id.managePropertiesButton);
+
+        manageUsersButton.setOnClickListener(v ->
+                Toast.makeText(this, "Felhasználó kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
+        );
+
+        manageMetersButton.setOnClickListener(v ->
+                Toast.makeText(this, "Mérő kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
+        );
+
+        managePropertiesButton.setOnClickListener(v ->
+                Toast.makeText(this, "Fogyasztási hely kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
+        );
     }
 }

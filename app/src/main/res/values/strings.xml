@@ -17,4 +17,17 @@
     <string name="set_new_meter_status">Új óraállás rögzítése</string>
     <string name="previous_status">Korábbi óraállások</string>
     <string name="search">Keresés</string>
+    <string name="meter_details">Óraállás részletei</string>
+    <string name="date_example">Dátum: 2026-03-01</string>
+    <string name="meter_example">Óraállás: 1234 m3</string>
+    <string name="note_example">Megjegyzés: minta adat</string>
+    <string name="edit">Szerkesztés</string>
+    <string name="delete">Törlés</string>
+    <string name="reminder_save">Emlékeztető mentése</string>
+    <string name="reminder_title">Emlékeztető címe</string>
+    <string name="edit_users">Felhasználók kezelése</string>
+    <string name="edit_meters">Mérők kezelése</string>
+    <string name="edit_properties">Fogyasztási helyek kezelése</string>
+    <string name="confirm_password">Jelszó megerősítése</string>
+    <string name="name">Név</string>
 </resources>
