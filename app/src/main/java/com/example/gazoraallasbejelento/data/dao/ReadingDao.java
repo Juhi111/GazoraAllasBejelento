@@ -18,6 +18,12 @@ public interface ReadingDao {
     @Query("SELECT * FROM readings")
     List<Reading> getAllReadings();
 
+
+    @Query("SELECT * FROM readings WHERE id = :readingId LIMIT 1")
+    Reading getReadingById(int readingId);
+
     @Delete
     void delete(Reading reading);
+
+
 }
