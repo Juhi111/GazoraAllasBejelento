@@ -10,4 +10,11 @@
     <string name="previous">Előzmények</string>
     <string name="new_meter">Új óraállás</string>
     <string name="main_menu">Főmenü</string>
+    <string name="save">Mentés</string>
+    <string name="note">Megjegyzés</string>
+    <string name="meter_status">Óraállás</string>
+    <string name="date">Dátum</string>
+    <string name="set_new_meter_status">Új óraállás rögzítése</string>
+    <string name="previous_status">Korábbi óraállások</string>
+    <string name="search">Keresés</string>
 </resources>
