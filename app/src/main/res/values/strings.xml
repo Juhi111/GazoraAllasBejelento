@@ -5,4 +5,9 @@
     <string name="login">Bejelentkezés</string>
     <string name="registration">Regisztráció</string>
     <string name="projectName">Gázóra állás bejelentő</string>
+    <string name="admin_layout">Admin felület</string>
+    <string name="reminders">Emlékeztetők</string>
+    <string name="previous">Előzmények</string>
+    <string name="new_meter">Új óraállás</string>
+    <string name="main_menu">Főmenü</string>
 </resources>

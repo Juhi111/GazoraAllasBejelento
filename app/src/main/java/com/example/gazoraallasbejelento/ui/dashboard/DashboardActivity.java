@@ -1,26 +1,44 @@
 package com.example.gazoraallasbejelento.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.gazoraallasbejelento.R;
+import com.example.gazoraallasbejelento.ui.admin.AdminActivity;
+import com.example.gazoraallasbejelento.ui.reading.NewReadingActivity;
+import com.example.gazoraallasbejelento.ui.reading.ReadingListActivity;
+import com.example.gazoraallasbejelento.ui.reminder.ReminderActivity;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    private Button newReadingButton;
+    private Button readingListButton;
+    private Button reminderButton;
+    private Button adminButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_dashboard);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        newReadingButton = findViewById(R.id.newReadingButton);
+        readingListButton = findViewById(R.id.readingListButton);
+        reminderButton = findViewById(R.id.reminderButton);
+        adminButton = findViewById(R.id.adminButton);
+
+        newReadingButton.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, NewReadingActivity.class)));
+
+        readingListButton.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, ReadingListActivity.class)));
+
+        reminderButton.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, ReminderActivity.class)));
+
+        adminButton.setOnClickListener(v ->
+                startActivity(new Intent(DashboardActivity.this, AdminActivity.class)));
     }
 }
