@@ -2,6 +2,7 @@ package com.example.gazoraallasbejelento.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +30,12 @@ public class DashboardActivity extends AppCompatActivity {
         reminderButton = findViewById(R.id.reminderButton);
         adminButton = findViewById(R.id.adminButton);
 
+        String userRole = getIntent().getStringExtra("userRole");
+
+        if (userRole == null || !userRole.equals("ADMIN")) {
+            adminButton.setVisibility(View.GONE);
+        }
+
         newReadingButton.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, NewReadingActivity.class)));
 
@@ -38,7 +45,10 @@ public class DashboardActivity extends AppCompatActivity {
         reminderButton.setOnClickListener(v ->
                 startActivity(new Intent(DashboardActivity.this, ReminderActivity.class)));
 
-        adminButton.setOnClickListener(v ->
-                startActivity(new Intent(DashboardActivity.this, AdminActivity.class)));
+        adminButton.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, AdminActivity.class);
+            intent.putExtra("userRole", userRole);
+            startActivity(intent);
+        });
     }
 }

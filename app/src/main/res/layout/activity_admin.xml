@@ -8,29 +8,35 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/admin_layout"
+        android:text="Admin felület"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/manageUsersButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_users"
-        android:layout_marginBottom="12dp"/>
+        android:text="Felhasználók betöltése"
+        android:layout_marginBottom="12dp" />
 
     <Button
         android:id="@+id/manageMetersButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_meters"
-        android:layout_marginBottom="12dp"/>
+        android:text="Mérők kezelése"
+        android:layout_marginBottom="12dp" />
 
     <Button
         android:id="@+id/managePropertiesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/edit_properties"/>
+        android:text="Fogyasztási helyek kezelése"
+        android:layout_marginBottom="16dp" />
+
+    <ListView
+        android:id="@+id/userListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

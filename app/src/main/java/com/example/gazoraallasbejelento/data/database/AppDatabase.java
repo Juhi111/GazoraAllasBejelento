@@ -12,6 +12,7 @@ import com.example.gazoraallasbejelento.data.entity.Property;
 import com.example.gazoraallasbejelento.data.entity.Reading;
 import com.example.gazoraallasbejelento.data.entity.Reminder;
 import com.example.gazoraallasbejelento.data.entity.User;
+import com.example.gazoraallasbejelento.data.dao.UserDao;
 
 @Database(
         entities = {
@@ -21,14 +22,14 @@ import com.example.gazoraallasbejelento.data.entity.User;
                 Reading.class,
                 Reminder.class
         },
-        version = 1
+        version = 2
 )
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
     public abstract ReadingDao readingDao();
-
+    public abstract UserDao userDao();
     public static synchronized AppDatabase getInstance(Context context) {
 
         if (instance == null) {
@@ -37,6 +38,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             "gazora_database"
                     )
+                    .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }
