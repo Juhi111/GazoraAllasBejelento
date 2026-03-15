@@ -7,14 +7,11 @@ import android.widget.ListView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.gazoraallasbejelento.R;
 import com.example.gazoraallasbejelento.data.database.AppDatabase;
 import com.example.gazoraallasbejelento.data.entity.Reading;
-
+import com.example.gazoraallasbejelento.data.entity.Meter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +64,19 @@ public class ReadingListActivity extends AppCompatActivity {
         List<String> readingTexts = new ArrayList<>();
 
         for (Reading reading : readings) {
-            String text = reading.getDate()
-                    + " - "
-                    + reading.getValue()
-                    + " m3 | Megjegyzés: "
-                    + reading.getNote();
+            Meter meter = db.meterDao().getAllMeters()
+                    .stream()
+                    .filter(m -> m.getId() == reading.getMeterId())
+                    .findFirst()
+                    .orElse(null);
+
+            String meterText = (meter != null) ? meter.getMeterNumber() : "ismeretlen mérő";
+
+            String text = "Mérő: " + meterText
+                    + " | Dátum: " + reading.getDate()
+                    + " | Állás: " + reading.getValue() + " m3"
+                    + " | Megjegyzés: " + reading.getNote();
+
             readingTexts.add(text);
         }
 
@@ -91,6 +96,7 @@ public class ReadingListActivity extends AppCompatActivity {
             intent.putExtra("date", selectedReading.getDate());
             intent.putExtra("value", selectedReading.getValue());
             intent.putExtra("note", selectedReading.getNote());
+            intent.putExtra("meterId", selectedReading.getMeterId());
             startActivity(intent);
         });
     }

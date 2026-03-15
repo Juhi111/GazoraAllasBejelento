@@ -2,6 +2,7 @@ package com.example.gazoraallasbejelento.ui.reading;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -11,6 +12,10 @@ import com.example.gazoraallasbejelento.data.database.AppDatabase;
 import com.example.gazoraallasbejelento.data.entity.Reading;
 import android.app.DatePickerDialog;
 import java.util.Calendar;
+import android.widget.Spinner;
+import com.example.gazoraallasbejelento.data.entity.Meter;
+import java.util.List;
+import java.util.ArrayList;
 
 public class NewReadingActivity extends AppCompatActivity {
 
@@ -19,6 +24,8 @@ public class NewReadingActivity extends AppCompatActivity {
     private EditText noteInput;
     private Button saveReadingButton;
     private int readingId = -1;
+    private Spinner meterSpinner;
+    private List<Meter> meters;
 
 
     @Override
@@ -30,6 +37,7 @@ public class NewReadingActivity extends AppCompatActivity {
         meterValueInput = findViewById(R.id.meterValueInput);
         noteInput = findViewById(R.id.noteInput);
         saveReadingButton = findViewById(R.id.saveReadingButton);
+        meterSpinner = findViewById(R.id.meterSpinner);
 
         readingId = getIntent().getIntExtra("readingId", -1);
 
@@ -47,6 +55,8 @@ public class NewReadingActivity extends AppCompatActivity {
         saveReadingButton.setOnClickListener(v -> saveReading());
         dateInput.setOnClickListener(v -> showDatePicker());
 
+        loadMeters();
+
     }
 
     private void saveReading() {
@@ -60,16 +70,24 @@ public class NewReadingActivity extends AppCompatActivity {
             return;
         }
 
+        if (meters == null || meters.isEmpty()) {
+            Toast.makeText(this, "Nincs kiválasztható mérő", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         int value = Integer.parseInt(valueText);
+
+        Meter selectedMeter = meters.get(meterSpinner.getSelectedItemPosition());
+        int meterId = selectedMeter.getId();
 
         AppDatabase db = AppDatabase.getInstance(this);
 
         if (readingId == -1) {
-            Reading reading = new Reading(1, date, value, note);
+            Reading reading = new Reading(meterId, date, value, note);
             db.readingDao().insert(reading);
             Toast.makeText(this, "Óraállás mentve", Toast.LENGTH_SHORT).show();
         } else {
-            Reading reading = new Reading(1, date, value, note);
+            Reading reading = new Reading(meterId, date, value, note);
             reading.setId(readingId);
             db.readingDao().update(reading);
             Toast.makeText(this, "Óraállás módosítva", Toast.LENGTH_SHORT).show();
@@ -103,7 +121,29 @@ public class NewReadingActivity extends AppCompatActivity {
                 month,
                 day
         );
-
         datePickerDialog.show();
+    }
+
+    private void loadMeters() {
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        meters = db.meterDao().getAllMeters();
+
+        List<String> meterTexts = new ArrayList<>();
+
+        for (Meter meter : meters) {
+            String text = "ID: " + meter.getId() + " - " + meter.getMeterNumber();
+            meterTexts.add(text);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                meterTexts
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        meterSpinner.setAdapter(adapter);
     }
 }
