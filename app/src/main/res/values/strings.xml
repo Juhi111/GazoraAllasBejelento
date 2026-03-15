@@ -30,4 +30,12 @@
     <string name="edit_properties">Fogyasztási helyek kezelése</string>
     <string name="confirm_password">Jelszó megerősítése</string>
     <string name="name">Név</string>
+    <string name="load_users">Felhasználók betöltése</string>
+    <string name="set_meters">Mérők kezelése</string>
+    <string name="set_properties">Fogyasztási helyek kezelése</string>
+    <string name="admin_help">Koppintás: szerepkör váltás | Hosszan nyomás: törlés</string>
+    <string name="property_save">Fogyasztási hely mentése</string>
+    <string name="address">Cím</string>
+    <string name="property_name">Fogyasztási hely neve</string>
+    <string name="manage_properties">Fogyasztási helyek kezelése</string>
 </resources>

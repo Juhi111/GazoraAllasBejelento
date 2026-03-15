@@ -51,7 +51,12 @@ public class AdminActivity extends AppCompatActivity {
                 Toast.makeText(this, "Fogyasztási hely kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
         );
 
-        userListView.setOnItemClickListener((parent, view, position, id) -> deleteUser(position));
+        userListView.setOnItemClickListener((parent, view, position, id) -> toggleUserRole(position));
+
+        userListView.setOnItemLongClickListener((parent, view, position, id) -> {
+            deleteUser(position);
+            return true;
+        });
     }
 
     private void loadUsers() {
@@ -93,6 +98,34 @@ public class AdminActivity extends AppCompatActivity {
         db.userDao().delete(selectedUser);
 
         Toast.makeText(this, "Felhasználó törölve", Toast.LENGTH_SHORT).show();
+        loadUsers();
+    }
+
+    private void toggleUserRole(int position) {
+        if (users == null || position < 0 || position >= users.size()) {
+            Toast.makeText(this, "Érvénytelen kiválasztás", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User selectedUser = users.get(position);
+
+        String loggedEmail = getIntent().getStringExtra("userEmail");
+
+        if (selectedUser.getEmail().equals(loggedEmail)) {
+            Toast.makeText(this, "A saját szerepkörödet nem módosíthatod", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ("ADMIN".equals(selectedUser.getRole())) {
+            selectedUser.setRole("USER");
+        } else {
+            selectedUser.setRole("ADMIN");
+        }
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        db.userDao().update(selectedUser);
+
+        Toast.makeText(this, "Szerepkör módosítva: " + selectedUser.getRole(), Toast.LENGTH_SHORT).show();
         loadUsers();
     }
 }

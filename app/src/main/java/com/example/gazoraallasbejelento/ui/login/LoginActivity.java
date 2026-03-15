@@ -25,6 +25,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        createDefaultAdmin();
+
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
         loginButton = findViewById(R.id.loginButton);
@@ -71,5 +73,22 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("userEmail", user.getEmail());
         startActivity(intent);
         finish();
+    }
+
+    private void createDefaultAdmin() {
+        AppDatabase db = AppDatabase.getInstance(this);
+
+        User existingAdmin = db.userDao().getUserByEmail("admin@gazora.hu");
+
+        if (existingAdmin == null) {
+            User adminUser = new User(
+                    "Rendszer Admin",
+                    "admin@gazora.hu",
+                    "admin123",
+                    "ADMIN"
+            );
+
+            db.userDao().insert(adminUser);
+        }
     }
 }

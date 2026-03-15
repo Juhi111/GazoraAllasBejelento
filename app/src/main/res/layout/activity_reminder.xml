@@ -26,7 +26,10 @@
         android:layout_height="wrap_content"
         android:hint="@string/date"
         android:minHeight="48dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:focusable="false"
+        android:clickable="true"
+        />
 
     <Button
         android:id="@+id/saveReminderButton"

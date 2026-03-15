@@ -1,11 +1,9 @@
 package com.example.gazoraallasbejelento.data.database;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-
 import com.example.gazoraallasbejelento.data.dao.ReadingDao;
 import com.example.gazoraallasbejelento.data.entity.Meter;
 import com.example.gazoraallasbejelento.data.entity.Property;
@@ -13,6 +11,8 @@ import com.example.gazoraallasbejelento.data.entity.Reading;
 import com.example.gazoraallasbejelento.data.entity.Reminder;
 import com.example.gazoraallasbejelento.data.entity.User;
 import com.example.gazoraallasbejelento.data.dao.UserDao;
+import com.example.gazoraallasbejelento.data.dao.ReminderDao;
+import com.example.gazoraallasbejelento.data.dao.PropertyDao;
 
 @Database(
         entities = {
@@ -30,6 +30,8 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ReadingDao readingDao();
     public abstract UserDao userDao();
+    public abstract ReminderDao reminderDao();
+    public abstract PropertyDao propertyDao();
     public static synchronized AppDatabase getInstance(Context context) {
 
         if (instance == null) {
