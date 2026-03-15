@@ -21,6 +21,7 @@ public class AdminActivity extends AppCompatActivity {
     private Button manageMetersButton;
     private Button managePropertiesButton;
     private ListView userListView;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,13 @@ public class AdminActivity extends AppCompatActivity {
         managePropertiesButton.setOnClickListener(v ->
                 Toast.makeText(this, "Fogyasztási hely kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
         );
+
+        userListView.setOnItemClickListener((parent, view, position, id) -> deleteUser(position));
     }
 
     private void loadUsers() {
         AppDatabase db = AppDatabase.getInstance(this);
-        List<User> users = db.userDao().getAllUsers();
+        users = db.userDao().getAllUsers();
 
         List<String> userTexts = new ArrayList<>();
 
@@ -69,5 +72,27 @@ public class AdminActivity extends AppCompatActivity {
         );
 
         userListView.setAdapter(adapter);
+    }
+
+    private void deleteUser(int position) {
+        if (users == null || position < 0 || position >= users.size()) {
+            Toast.makeText(this, "Érvénytelen kiválasztás", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User selectedUser = users.get(position);
+
+        String loggedEmail = getIntent().getStringExtra("userEmail");
+
+        if (selectedUser.getEmail().equals(loggedEmail)) {
+            Toast.makeText(this, "Saját felhasználót nem törölheted", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        db.userDao().delete(selectedUser);
+
+        Toast.makeText(this, "Felhasználó törölve", Toast.LENGTH_SHORT).show();
+        loadUsers();
     }
 }

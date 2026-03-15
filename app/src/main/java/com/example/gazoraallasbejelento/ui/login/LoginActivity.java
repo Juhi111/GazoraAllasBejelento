@@ -68,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
         intent.putExtra("userRole", role);
+        intent.putExtra("userEmail", user.getEmail());
         startActivity(intent);
         finish();
     }

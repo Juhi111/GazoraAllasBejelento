@@ -48,6 +48,7 @@ public class DashboardActivity extends AppCompatActivity {
         adminButton.setOnClickListener(v -> {
             Intent intent = new Intent(DashboardActivity.this, AdminActivity.class);
             intent.putExtra("userRole", userRole);
+            intent.putExtra("userEmail", getIntent().getStringExtra("userEmail"));
             startActivity(intent);
         });
     }
