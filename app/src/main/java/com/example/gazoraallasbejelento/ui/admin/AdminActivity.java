@@ -5,12 +5,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.gazoraallasbejelento.R;
 import com.example.gazoraallasbejelento.data.database.AppDatabase;
 import com.example.gazoraallasbejelento.data.entity.User;
+import android.content.Intent;
+import com.example.gazoraallasbejelento.ui.admin.MeterActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,13 +43,15 @@ public class AdminActivity extends AppCompatActivity {
 
         manageUsersButton.setOnClickListener(v -> loadUsers());
 
-        manageMetersButton.setOnClickListener(v ->
-                Toast.makeText(this, "Mérő kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
-        );
+        manageMetersButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, MeterActivity.class);
+            startActivity(intent);
+        });
 
-        managePropertiesButton.setOnClickListener(v ->
-                Toast.makeText(this, "Fogyasztási hely kezelés később lesz implementálva", Toast.LENGTH_SHORT).show()
-        );
+        managePropertiesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(AdminActivity.this, PropertyActivity.class);
+            startActivity(intent);
+        });
 
         userListView.setOnItemClickListener((parent, view, position, id) -> toggleUserRole(position));
 

@@ -13,6 +13,7 @@ import com.example.gazoraallasbejelento.data.entity.User;
 import com.example.gazoraallasbejelento.data.dao.UserDao;
 import com.example.gazoraallasbejelento.data.dao.ReminderDao;
 import com.example.gazoraallasbejelento.data.dao.PropertyDao;
+import com.example.gazoraallasbejelento.data.dao.MeterDao;
 
 @Database(
         entities = {
@@ -32,6 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract ReminderDao reminderDao();
     public abstract PropertyDao propertyDao();
+    public abstract MeterDao meterDao();
     public static synchronized AppDatabase getInstance(Context context) {
 
         if (instance == null) {

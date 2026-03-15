@@ -38,4 +38,8 @@
     <string name="address">Cím</string>
     <string name="property_name">Fogyasztási hely neve</string>
     <string name="manage_properties">Fogyasztási helyek kezelése</string>
+    <string name="save_meter">Mérő mentése</string>
+    <string name="property_ip">Fogyasztási hely ID</string>
+    <string name="meter_number">Mérő gyári száma</string>
+    <string name="manage_meters">Mérők kezelése</string>
 </resources>
