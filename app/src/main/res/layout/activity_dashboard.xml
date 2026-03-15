@@ -41,4 +41,11 @@
         android:layout_height="wrap_content"
         android:text="@string/admin_layout" />
 
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout"
+        android:layout_marginTop="12dp" />
+
 </LinearLayout>

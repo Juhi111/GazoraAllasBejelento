@@ -42,4 +42,6 @@
     <string name="property_ip">Fogyasztási hely ID</string>
     <string name="meter_number">Mérő gyári száma</string>
     <string name="manage_meters">Mérők kezelése</string>
+    <string name="sort_list">Rendezés óraállás szerint</string>
+    <string name="logout">Kijelentkezés</string>
 </resources>

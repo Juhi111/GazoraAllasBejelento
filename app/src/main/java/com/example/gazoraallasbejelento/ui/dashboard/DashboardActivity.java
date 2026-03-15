@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gazoraallasbejelento.R;
 import com.example.gazoraallasbejelento.ui.admin.AdminActivity;
+import com.example.gazoraallasbejelento.ui.login.LoginActivity;
 import com.example.gazoraallasbejelento.ui.reading.NewReadingActivity;
 import com.example.gazoraallasbejelento.ui.reading.ReadingListActivity;
 import com.example.gazoraallasbejelento.ui.reminder.ReminderActivity;
@@ -19,6 +20,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Button readingListButton;
     private Button reminderButton;
     private Button adminButton;
+    private Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class DashboardActivity extends AppCompatActivity {
         readingListButton = findViewById(R.id.readingListButton);
         reminderButton = findViewById(R.id.reminderButton);
         adminButton = findViewById(R.id.adminButton);
+        logoutButton = findViewById(R.id.logoutButton);
 
         String userRole = getIntent().getStringExtra("userRole");
 
@@ -50,6 +53,13 @@ public class DashboardActivity extends AppCompatActivity {
             intent.putExtra("userRole", userRole);
             intent.putExtra("userEmail", getIntent().getStringExtra("userEmail"));
             startActivity(intent);
+        });
+
+        logoutButton.setOnClickListener(v -> {
+            Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         });
     }
 }
