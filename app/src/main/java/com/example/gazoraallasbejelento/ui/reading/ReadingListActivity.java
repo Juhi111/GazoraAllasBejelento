@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import android.widget.Spinner;
 import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.ProgressBar;
 
 public class ReadingListActivity extends AppCompatActivity {
 
@@ -32,6 +34,8 @@ public class ReadingListActivity extends AppCompatActivity {
     private Spinner filterMeterSpinner;
     private List<Meter> meters;
     private int selectedMeterId = -1;
+    private TextView emptyStateText;
+    private ProgressBar loadingProgressBar;
 
 
     @Override
@@ -43,6 +47,8 @@ public class ReadingListActivity extends AppCompatActivity {
         searchInput = findViewById(R.id.searchInput);
         sortButton = findViewById(R.id.sortButton);
         filterMeterSpinner = findViewById(R.id.filterMeterSpinner);
+        emptyStateText = findViewById(R.id.emptyStateText);
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
 
         loadReadings();
 
@@ -93,6 +99,10 @@ public class ReadingListActivity extends AppCompatActivity {
         AppDatabase db = AppDatabase.getInstance(this);
         readings = db.readingDao().getAllReadings();
 
+        loadingProgressBar.setVisibility(View.VISIBLE);
+        readingListView.setVisibility(View.GONE);
+        emptyStateText.setVisibility(View.GONE);
+
         List<String> readingTexts = new ArrayList<>();
 
         for (Reading reading : readings) {
@@ -121,6 +131,14 @@ public class ReadingListActivity extends AppCompatActivity {
                 readingTexts
         );
 
+        if (readingTexts.isEmpty()) {
+            readingListView.setVisibility(View.GONE);
+            emptyStateText.setVisibility(View.VISIBLE);
+        } else {
+            readingListView.setVisibility(View.VISIBLE);
+            emptyStateText.setVisibility(View.GONE);
+        }
+
         readingListView.setAdapter(adapter);
 
         readingListView.setOnItemClickListener((parent, view, position, id) -> {
@@ -134,6 +152,8 @@ public class ReadingListActivity extends AppCompatActivity {
             intent.putExtra("meterId", selectedReading.getMeterId());
             startActivity(intent);
         });
+
+        loadingProgressBar.setVisibility(View.GONE);
     }
 
     private void refreshReadingList() {

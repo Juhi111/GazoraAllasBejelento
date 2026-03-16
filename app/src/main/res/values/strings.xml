@@ -44,4 +44,5 @@
     <string name="manage_meters">Mérők kezelése</string>
     <string name="sort_list">Rendezés óraállás szerint</string>
     <string name="logout">Kijelentkezés</string>
+    <string name="empty_list">Még nincs rögzített óraállás.</string>
 </resources>

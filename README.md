@@ -141,6 +141,21 @@ Run → app
 
 ------------------------------------------------------------------------
 
+## AI támogatás
+
+A projekt fejlesztése során AI alapú eszközök (ChatGPT) kerültek használatra.
+
+Az AI az alábbi területeken nyújtott támogatást:
+- architektúra tervezés
+- adatmodell kialakítása
+- Room adatbázis használata
+- navigáció és UI struktúra
+- tesztelési stratégia
+- dokumentáció készítése
+
+Az AI által adott javaslatok minden esetben fejlesztői ellenőrzés után kerültek be a projektbe.
+
+
 # Fejlesztő
 
 \[Juhász Ádám\]\
